@@ -1,0 +1,24 @@
+services:
+  analyzer:
+    build: .
+    volumes:
+      - repo-data:/workspace/repos
+      - ./scripts:/workspace/scripts
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+
+  jupyter:
+    build: .
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    ports:
+      - "8888:8888"
+    volumes:
+      - repo-data:/workspace/repos
+      - ./notebooks:/workspace/notebooks
+    env_file:
+      - .env
+
+volumes:
+  repo-data:
