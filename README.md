@@ -1,4 +1,4 @@
-# Lab 03: Docker — pakujemy warsztat analityka
+# Lab 03: Docker - pakujemy warsztat analityka
 
 ## Czy wiesz, że...
 
@@ -53,6 +53,8 @@ RUN apt-get update && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN mkdir -p /workspace/repos /workspace/reports /workspace/notebooks /workspace/scripts
+
 CMD ["bash"]
 ```
 
@@ -103,7 +105,7 @@ cloc .
 radon cc src/requests/api.py -s
 ```
 
-Jeśli wszystko zadziałało — macie obraz analityka gotowy do użycia.
+Jeśli wszystko zadziałało - macie obraz analityka gotowy do użycia.
 
 ### Zadanie 2: docker-compose dla analityka (60 min)
 
@@ -166,7 +168,7 @@ mkdir -p scripts notebooks
 docker compose up -d
 ```
 
-**Krok 5:** Sprawdźcie czy Jupyter działa — otwórzcie przeglądarkę na http://localhost:8888. Powinniście zobaczyć interfejs Jupytera.
+**Krok 5:** Sprawdźcie czy Jupyter działa - otwórzcie przeglądarkę na http://localhost:8888. Powinniście zobaczyć interfejs Jupytera.
 
 **Krok 6:** Sklonujcie repo do wspólnego wolumenu (przez serwis analyzer):
 
@@ -194,14 +196,14 @@ docker compose down
 
 Dane w wolumenie `repo-data` przetrwają restart. Żeby je usunąć: `docker compose down -v`.
 
-### Zadanie 3: Skrypt bootstrap (30 min) — dla ambitnych
+### Zadanie 3: Skrypt bootstrap (30 min) - dla ambitnych
 
 Napiszcie skrypt `setup.sh`, który automatyzuje przygotowanie środowiska:
 
 **Do zrobienia:**
 - Sklonować wybrane repo OSS do wolumenu
 - Uruchomić wstępną analizę (cloc, radon) i zapisać wyniki
-- Wygenerować krótki raport w formacie tekstowym
+- Zapisać wyniki analizy w formacie CSV i JSON
 
 ```bash
 #!/bin/bash
@@ -219,6 +221,8 @@ else
 fi
 
 cd "$WORKSPACE/$REPO_NAME"
+
+mkdir -p /workspace/reports
 
 echo "=== Analiza cloc ==="
 cloc . --quiet --csv --out="/workspace/reports/${REPO_NAME}_cloc.csv"
@@ -242,11 +246,11 @@ docker compose exec analyzer bash /workspace/scripts/setup.sh https://github.com
 
 W swoim branchu `lab03_nazwisko1_nazwisko2`:
 
-1. **`Dockerfile`** — obraz z narzędziami analitycznymi
-2. **`docker-compose.yml`** — orkiestracja serwisów
-3. **`.env.example`** — szablon zmiennych środowiskowych (bez prawdziwego tokena!)
-4. **`requirements.txt`** — zależności Pythonowe
-5. *(opcjonalnie)* **`scripts/setup.sh`** — skrypt bootstrap z zadania 3
+1. **`Dockerfile`** - obraz z narzędziami analitycznymi
+2. **`docker-compose.yml`** - orkiestracja serwisów
+3. **`.env.example`** - szablon zmiennych środowiskowych (bez prawdziwego tokena!)
+4. **`requirements.txt`** - zależności Pythonowe
+5. *(opcjonalnie)* **`scripts/setup.sh`** - skrypt bootstrap z zadania 3
 
 ## Kryteria oceny
 
@@ -260,7 +264,7 @@ W swoim branchu `lab03_nazwisko1_nazwisko2`:
 ## FAQ
 
 **P: Docker build trwa wieczność.**
-O: Pierwszy build pobiera bazowy obraz (~150 MB) i instaluje pakiety. Kolejne będą szybsze dzięki cache. Upewnij się, że `COPY requirements.txt` jest PRZED `RUN pip install` — wtedy pip nie reinstaluje się przy każdej zmianie kodu.
+O: Pierwszy build pobiera bazowy obraz (~150 MB) i instaluje pakiety. Kolejne będą szybsze dzięki cache. Upewnij się, że `COPY requirements.txt` jest PRZED `RUN pip install` - wtedy pip nie reinstaluje się przy każdej zmianie kodu.
 
 **P: `docker compose up` nie działa, mam `docker-compose` (z myślnikiem).**
 O: Starsza wersja. `docker-compose up` (z myślnikiem) też zadziała. Albo zaktualizuj Docker Desktop.
@@ -283,4 +287,4 @@ O: Pracuj w parze na maszynie kolegi/koleżanki, albo użyj GitHub Codespaces (d
 - [Best practices for writing Dockerfiles](https://docs.docker.com/build/building/best-practices/)
 
 ---
-*"Kiedyś deploye robiło się na piechotę, pod górkę, w obie strony."* — każdy senior developer (źródło: trust me bro)
+*"Kiedyś deploye robiło się na piechotę, pod górkę, w obie strony."* - każdy senior developer (źródło: trust me bro)
