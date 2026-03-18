@@ -4,6 +4,7 @@ services:
     volumes:
       - repo-data:/workspace/repos
       - ./scripts:/workspace/scripts
+      - ./reports:/workspace/reports # Dodane, by zapisywać raporty
     env_file:
       - .env
     stdin_open: true
