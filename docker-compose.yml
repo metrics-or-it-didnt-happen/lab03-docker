@@ -1,6 +1,7 @@
 services:
   analyzer:
     build: .
+    container_name: code-analyzer
     volumes:
       - repo-data:/workspace/repos
       - ./scripts:/workspace/scripts
@@ -11,6 +12,7 @@ services:
 
   jupyter:
     build: .
+    container_name: code-jupyter
     command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
     ports:
       - "8888:8888"
