@@ -4,6 +4,7 @@ services:
     volumes:
       - repo-data:/workspace/repos
       - ./scripts:/workspace/scripts
+      - ./reports:/workspace/reports
     env_file:
       - .env
     stdin_open: true
@@ -11,12 +12,19 @@ services:
 
   jupyter:
     build: .
-    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+    command: >-
+      jupyter notebook
+        --ip=0.0.0.0
+        --port=8888
+        --no-browser
+        --allow-root
+        --ServerApp.token=''
     ports:
       - "8888:8888"
     volumes:
       - repo-data:/workspace/repos
       - ./notebooks:/workspace/notebooks
+      - ./reports:/workspace/reports
     env_file:
       - .env
 

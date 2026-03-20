@@ -1,17 +1,15 @@
-*.aux
-*.log
-*.nav
-*.out
-*.snm
-*.toc
-*.vrb
-*.synctex.gz
-*.tex
-notatki.txt
+# Environment
 .env
+
+# Python
 __pycache__/
-*.pyc
+*.py[oc]
 .venv/
-venv/
+
+# Generated output
+reports/
+notebooks/
+
+# OS junk
 .DS_Store
 Thumbs.db
