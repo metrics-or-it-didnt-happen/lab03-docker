@@ -1,8 +1,8 @@
-radon==6.0.1
-lizard==1.17.10
-matplotlib==3.9.2
-seaborn==0.13.2
-pandas==2.2.3
-requests==2.32.3
-PyGithub==2.5.0
-jupyter==1.1.1
+radon==6.0.1 # For code complexity analysis
+lizard==1.17.10 # For code complexity analysis
+matplotlib==3.9.2 # For data visualization
+seaborn==0.13.2 # For enhanced data visualization
+pandas==2.2.3 # For data manipulation and analysis
+requests==2.32.3 # For making HTTP requests to GitHub API
+PyGithub==2.5.0 # For interacting with GitHub API
+jupyter==1.1.1 # For running Jupyter notebooks

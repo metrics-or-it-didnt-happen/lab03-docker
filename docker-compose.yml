@@ -1,9 +1,11 @@
+# Docker Compose file to define services for repository analysis and Jupyter notebook environment
 services:
   analyzer:
     build: .
     volumes:
       - repo-data:/workspace/repos
       - ./scripts:/workspace/scripts
+      - ./reports:/workspace/reports
     env_file:
       - .env
     stdin_open: true
