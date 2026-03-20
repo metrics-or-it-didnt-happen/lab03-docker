@@ -4,6 +4,7 @@ services:
     volumes:
       - repo-data:/workspace/repos
       - ./scripts:/workspace/scripts
+      - ./reports:/workspace/reports
     env_file:
       - .env
     stdin_open: true
@@ -17,6 +18,7 @@ services:
     volumes:
       - repo-data:/workspace/repos
       - ./notebooks:/workspace/notebooks
+      - ./reports:/workspace/reports
     env_file:
       - .env
 
