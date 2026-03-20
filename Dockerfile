@@ -15,3 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /workspace/repos /workspace/reports /workspace/notebooks /workspace/scripts
 
 CMD ["bash"]
+
+# ZOLTE KACZUCHY
