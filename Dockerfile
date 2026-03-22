@@ -10,6 +10,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+COPY --chmod=755 setup.sh .
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mkdir -p /workspace/repos /workspace/reports /workspace/notebooks /workspace/scripts

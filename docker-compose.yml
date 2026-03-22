@@ -3,7 +3,7 @@ services:
     build: .
     volumes:
       - repo-data:/workspace/repos
-      - ./scripts:/workspace/scripts
+      - scripts-data:/workspace/scripts
     env_file:
       - .env
     stdin_open: true
@@ -22,3 +22,4 @@ services:
 
 volumes:
   repo-data:
+  scripts-data:
